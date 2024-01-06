@@ -14,10 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::prefix('/admin')->middleware('role:admin')->group(function () {
+// });
+
 
 Route::get('/', function () {
     return view('home');
 });
+
+Route::get('/admin', [UserController::class, 'admin'])->name('dashboard');
+Route::get('admin', [UserController::class, 'loginAdmin'])->name('loginAdmin');
+Route::post('admin', [UserController::class, 'loginAdmin_action'])->name('loginAdmin.action');
 
 Route::get('/home', [UserController::class, 'index'])->name('home');
 Route::get('register', [UserController::class, 'register'])->name('register');
@@ -64,4 +71,5 @@ Route::get('/aturan', function () {
 Route::get('/tshirt', function () {
     return view('layouts.collections.tshirt');
 });
+
 

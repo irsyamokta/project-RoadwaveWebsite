@@ -1,49 +1,61 @@
-@extends('master')
+{{-- @extends('master')
 @section('content')
-@auth
-    {{-- Navbar start --}}
-    @include('layouts.navigasi.navbar')
-    {{-- Navbar end --}}
 
-    {{-- Hero start --}}
-    @include('layouts.hero')
-    {{-- Hero end --}}
+        @include('layouts.navigasi.navbarguest')
 
-    {{-- Product best seller start --}}
-    @include('layouts.best')
-    {{-- Product best seller end --}}
+        @include('layouts.hero')
 
-    {{-- Display product start --}}
-    @include('layouts.ourproduct')
-    {{-- Display product end --}}
+        @include('layouts.best')
 
-    {{-- Footer start --}}
-    @include('layouts.footer')
-    {{-- Footer end --}}
+        @include('layouts.ourproduct')
 
-    @include('script')
-@endauth
+        @include('layouts.footerguest')
+
+        @include('script')
 @guest
-    {{-- Navbar start --}}
+    
     @include('layouts.navigasi.navbarguest')
-    {{-- Navbar end --}}
 
-    {{-- Hero start --}}
     @include('layouts.hero')
-    {{-- Hero end --}}
 
-    {{-- Product best seller start --}}
     @include('layouts.best')
-    {{-- Product best seller end --}}
 
-    {{-- Display product start --}}
     @include('layouts.ourproduct')
-    {{-- Display product end --}}
 
-    {{-- Footer start --}}
     @include('layouts.footerguest')
-    {{-- Footer end --}}
 
     @include('script')
 @endguest
+@endsection --}}
+
+@extends('master')
+@section('content')
+
+    @auth
+        {{-- Check if the user has the 'admin' role --}}
+        @can('admin')
+            {{-- Admin-specific content --}}
+            @include('admin.dashboard')
+        @else
+            {{-- User-specific content --}}
+            @include('layouts.navigasi.navbar')
+            @include('layouts.hero')
+            @include('layouts.best')
+            @include('layouts.ourproduct')
+            @include('layouts.footer')
+        @endcan
+
+        @include('script')
+
+    @else
+        {{-- Guest content --}}
+        @include('layouts.navigasi.navbarguest')
+        @include('layouts.hero')
+        @include('layouts.best')
+        @include('layouts.ourproduct')
+        @include('layouts.footerguest')
+        @include('script')
+
+    @endauth
+
 @endsection
