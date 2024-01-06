@@ -40,21 +40,21 @@
   </nav>
 
   <!-- Product-Card -->
-
   <div class="px-2 py-6 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 w-full max-w-screen-xl mx-auto">
+    @foreach ($products as $product)
     <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-darkmodeOther dark:border-gray-700">
       <a href="">
-        <img src="{{ url('assets/product/IMG_8815.JPG') }}" class="rounded-t-lg" width="w-full" alt="" />
+        <img src="{{ url('assets/product/' . $product->image . '') }}" class="rounded-t-lg" width="w-full" alt="" />
       </a>
       <div class="px-2 py-3">
-        <h3 class="text-slate-500 text-xs">T-Shirt</h3>
+        <h3 class="text-slate-500 text-xs">{{ $product->category }}</h3>
         <a href="">
-          <h5 class="text-base font-bold text-gray-900 dark:text-gray-200 mb-1">Roadwave T-Shirt Nissan GTR</h5>
+          <h5 class="text-base font-bold text-gray-900 dark:text-gray-200 mb-1">{{ $product->name }}</h5>
         </a>
         <div class="flex justify-between">
           <div class="flex justify-start items-center flex-wrap">
             <p class="text-xs text-red-600 mr-0.5">Rp</p>
-            <p class="text-xs text-red-600 mr-1">90.000</p>
+            <p class="text-xs text-red-600 mr-1">{{ number_format($product->price, 0, ',', '.') }}</p>
             <p class="text-xs mr-0.5 dark:text-slate-600"><s>Rp</s></p>
             <p class="text-xs dark:text-slate-600"><s>120.000</s></p>
           </div>
@@ -64,94 +64,7 @@
         </div>
       </div>
     </div>
-    <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-darkmodeOther dark:border-gray-700">
-      <a href="">
-        <img src="{{ url('assets/product/IMG_8816.JPG') }}" class="rounded-t-lg" width="w-full" alt="" />
-      </a>
-      <div class="px-2 py-3">
-        <h3 class="text-slate-500 text-xs">T-Shirt</h3>
-        <a href="">
-          <h5 class="text-base font-bold text-gray-900 dark:text-gray-200 mb-1">Roadwave T-Shirt Nissan GTR</h5>
-        </a>
-        <div class="flex justify-between">
-          <div class="flex justify-start items-center flex-wrap">
-            <p class="text-xs text-red-600 mr-0.5">Rp</p>
-            <p class="text-xs text-red-600 mr-1">90.000</p>
-            <p class="text-xs mr-0.5 dark:text-slate-600"><s>Rp</s></p>
-            <p class="text-xs dark:text-slate-600"><s>120.000</s></p>
-          </div>
-          <div class="flex items-center justify-center ml-1">
-            <span class="bg-red-600 px-1 py-[5px] text-white font-semibold text-[10px] rounded">20%</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-darkmodeOther dark:border-gray-700">
-      <a href="">
-        <img src="{{ url('assets/product/IMG_8817.JPG') }}" class="rounded-t-lg" width="w-full" alt="" />
-      </a>
-      <div class="px-2 py-3">
-        <h3 class="text-slate-500 text-xs">T-Shirt</h3>
-        <a href="">
-          <h5 class="text-base font-bold text-gray-900 dark:text-gray-200 mb-1">Roadwave T-Shirt Nissan GTR</h5>
-        </a>
-        <div class="flex justify-between">
-          <div class="flex justify-start items-center flex-wrap">
-            <p class="text-xs text-red-600 mr-0.5">Rp</p>
-            <p class="text-xs text-red-600 mr-1">90.000</p>
-            <p class="text-xs mr-0.5 dark:text-slate-600"><s>Rp</s></p>
-            <p class="text-xs dark:text-slate-600"><s>120.000</s></p>
-          </div>
-          <div class="flex items-center justify-center ml-1">
-            <span class="bg-red-600 px-1 py-[5px] text-white font-semibold text-[10px] rounded">20%</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-darkmodeOther dark:border-gray-700">
-      <a href="">
-        <img src="{{ url('assets/product/IMG_8818.JPG') }}" class="rounded-t-lg" width="w-full" alt="" />
-      </a>
-      <div class="px-2 py-3">
-        <h3 class="text-slate-500 text-xs">T-Shirt</h3>
-        <a href="">
-          <h5 class="text-base font-bold text-gray-900 dark:text-gray-200 mb-1">Roadwave T-Shirt Nissan GTR</h5>
-        </a>
-        <div class="flex justify-between">
-          <div class="flex justify-start items-center flex-wrap">
-            <p class="text-xs text-red-600 mr-0.5">Rp</p>
-            <p class="text-xs text-red-600 mr-1">90.000</p>
-            <p class="text-xs mr-0.5 dark:text-slate-600"><s>Rp</s></p>
-            <p class="text-xs dark:text-slate-600"><s>120.000</s></p>
-          </div>
-          <div class="flex items-center justify-center ml-1">
-            <span class="bg-red-600 px-1 py-[5px] text-white font-semibold text-[10px] rounded">20%</span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-darkmodeOther dark:border-gray-700">
-      <a href="">
-        <img src="{{ url('assets/product/IMG_8819.JPG') }}" class="rounded-t-lg" width="w-full" alt="" />
-      </a>
-      <div class="px-2 py-3">
-        <h3 class="text-slate-500 text-xs">T-Shirt</h3>
-        <a href="">
-          <h5 class="text-base font-bold text-gray-900 dark:text-gray-200 mb-1">Roadwave T-Shirt Nissan GTR</h5>
-        </a>
-        <div class="flex justify-between">
-          <div class="flex justify-start items-center flex-wrap">
-            <p class="text-xs text-red-600 mr-0.5">Rp</p>
-            <p class="text-xs text-red-600 mr-1">90.000</p>
-            <p class="text-xs mr-0.5 dark:text-slate-600"><s>Rp</s></p>
-            <p class="text-xs dark:text-slate-600"><s>120.000</s></p>
-          </div>
-          <div class="flex items-center justify-center ml-1">
-            <span class="bg-red-600 px-1 py-[5px] text-white font-semibold text-[10px] rounded">20%</span>
-          </div>
-        </div>
-      </div>
-    </div>
+    @endforeach
   </div>
 @auth
   @include('layouts.footer')

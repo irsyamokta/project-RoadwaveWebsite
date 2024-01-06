@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,14 +19,15 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-Route::get('/', function () {
-    return view('home');
-});
+// Route::get('/', function () {
+//     return view('home');
+// });
 
 Route::get('/admin', [UserController::class, 'admin'])->name('dashboard');
 Route::get('admin', [UserController::class, 'loginAdmin'])->name('loginAdmin');
 Route::post('admin', [UserController::class, 'loginAdmin_action'])->name('loginAdmin.action');
 
+Route::get('', [UserController::class, 'product'])->name('product');
 Route::get('/home', [UserController::class, 'index'])->name('home');
 Route::get('register', [UserController::class, 'register'])->name('register');
 Route::post('register', [UserController::class, 'register_action'])->name('register.action');
@@ -34,6 +36,7 @@ Route::post('login', [UserController::class, 'login_action'])->name('login.actio
 Route::get('password', [UserController::class, 'password'])->name('password');
 Route::post('password', [UserController::class, 'password_action'])->name('password.action');
 Route::get('logout', [UserController::class, 'logout'])->name('logout');
+Route::get('/tshirt', [ProductController::class, 'product'])->name('product');
 
 Route::get('/panduanukuran', function () {
     return view('layouts.bantuan.panduanukuran');
@@ -68,8 +71,9 @@ Route::get('/syaratketentuan', function () {
 Route::get('/aturan', function () {
     return view('layouts.informasi.aturan');
 });
-Route::get('/tshirt', function () {
-    return view('layouts.collections.tshirt');
-});
+
+// Route::get('/tshirt', function () {
+//     return view('layouts.collections.tshirt');
+// });
 
 
