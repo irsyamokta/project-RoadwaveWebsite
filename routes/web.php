@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,27 +18,39 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::prefix('/admin')->middleware('role:admin')->group(function () {
-// });
+Route::controller(AdminController::class)->group(function () {
+    Route::get('admin', [AdminController::class, 'loginAdmin'])->name('loginAdmin');
+    Route::post('admin', [AdminController::class, 'loginAdmin_action'])->name('loginAdmin.action');
+    Route::prefix('homepage')->middleware('user.role:admin')->group(function () {
+        Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
+        Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+        Route::get('products', [AdminController::class, 'products'])->name('products');
+        Route::get('addproduct', [AdminController::class, 'addproduct'])->name('addproduct');
+        Route::post('addproduct', [AdminController::class, 'addproduct_action'])->name('addproduct.action');
+        Route::get('editproduct/{id}', [AdminController::class, 'editproduct'])->name('editproduct');
+        Route::post('editproduct/{id}', [AdminController::class, 'editproduct_action'])->name('editproduct.action');
+        Route::delete('deleteproduct/{id}', [AdminController::class, 'deleteproduct_action'])->name('deleteproduct.action');
+    });
+});
 
+Route::controller(UserController::class)->group(function () {
+    Route::get('home', [UserController::class, 'index'])->name('home');
+    Route::get('register', [UserController::class, 'register'])->name('register');
+    Route::post('register', [UserController::class, 'register_action'])->name('register.action');
+    Route::get('login', [UserController::class, 'login'])->name('login');
+    Route::post('login', [UserController::class, 'login_action'])->name('login.action');
+    Route::get('password', [UserController::class, 'password'])->name('password');
+    Route::post('password', [UserController::class, 'password_action'])->name('password.action');
+    Route::get('logout', [UserController::class, 'logout'])->name('logout');
+});
 
-// Route::get('/', function () {
-//     return view('home');
-// });
+Route::controller(HomeController::class)->group(function (){
+    Route::prefix('/')->group(function (){
+        Route::get('', [HomeController::class, 'product'])->name('product');
+        Route::get('/home', [HomeController::class, 'product'])->name('product');
+    });
+});
 
-Route::get('/admin', [UserController::class, 'admin'])->name('dashboard');
-Route::get('admin', [UserController::class, 'loginAdmin'])->name('loginAdmin');
-Route::post('admin', [UserController::class, 'loginAdmin_action'])->name('loginAdmin.action');
-
-Route::get('', [UserController::class, 'product'])->name('product');
-Route::get('/home', [UserController::class, 'index'])->name('home');
-Route::get('register', [UserController::class, 'register'])->name('register');
-Route::post('register', [UserController::class, 'register_action'])->name('register.action');
-Route::get('login', [UserController::class, 'login'])->name('login');
-Route::post('login', [UserController::class, 'login_action'])->name('login.action');
-Route::get('password', [UserController::class, 'password'])->name('password');
-Route::post('password', [UserController::class, 'password_action'])->name('password.action');
-Route::get('logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/tshirt', [ProductController::class, 'product'])->name('product');
 
 Route::get('/panduanukuran', function () {
@@ -71,9 +86,3 @@ Route::get('/syaratketentuan', function () {
 Route::get('/aturan', function () {
     return view('layouts.informasi.aturan');
 });
-
-// Route::get('/tshirt', function () {
-//     return view('layouts.collections.tshirt');
-// });
-
-

@@ -5,7 +5,7 @@
     @foreach ($products as $product)
     <div class="w-[190px] sm:w-56 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 box-border mx-0.5 my-2 sm:mx-2 lg:mx-3 lg:my-3">
       <a href="#">
-        <img class="p-2 rounded-t-lg" src="{{ 'assets/product/' . $product->image . '' }}" width="100%" alt="product image" />
+        <img class="p-2 rounded-t-lg" src="{{ url('storage/assets/product/' . $product->image . '') }}" width="100%" alt="product image" />
       </a>
       <div class="px-2 pb-2">
         <h3 class="text-slate-500 text-sm">{{ $product->category }}</h3>

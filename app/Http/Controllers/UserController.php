@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Product;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -16,9 +15,6 @@ class UserController extends Controller
         return view('home');
     }
 
-    public function admin(){
-        return view('admin.dashboard');
-    }
     public function register()
     {
         $data['title'] = 'Register';
@@ -71,7 +67,7 @@ class UserController extends Controller
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password, 'role' => 'user'])) {
             $request->session()->regenerate();
 
-            return redirect()->route('home');
+            return redirect()->route('login');
         }
 
         return back()->withErrors([
@@ -117,46 +113,5 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/');
-    }
-
-    public function loginAdmin()
-    {
-        if (Auth::check()) {
-            return redirect('/');
-        }
-
-        $data['title'] = 'Login Admin';
-        return view('admin/login', $data);
-    }
-
-    public function loginAdmin_action(Request $request) {
-        $request->validate([
-            'username' => 'required',
-            'password' => 'required',
-        ]);
-
-        $user = User::where('username', $request->username)->first();
-
-        $user = User::where('username', $request->username)->first();
-
-        if ($user && $user->role === 'user') {
-            return back()->withInput()->withErrors(['error' => 'Akses Dibatasi']);
-        }
-
-        if (Auth::attempt(['username' => $request->username, 'password' => $request->password, 'role' => 'admin'])) {
-            $request->session()->regenerate();
-            return redirect()->route('admin');
-        } 
-
-        return back()->withErrors([
-            'password' => 'Username atau Password salah',
-        ]);
-    }
-
-    public function product()
-    {
-        $products = Product::all();
-
-        return view('home', compact('products'));
     }
 }

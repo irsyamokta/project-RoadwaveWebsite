@@ -15,11 +15,12 @@ return new class extends Migration
             $table->id('id');
             $table->string('name');
             $table->float('price');
-            $table->string('desciption');
+            $table->string('description');
             $table->enum('category', ['T-Shirt', 'Shirt', 'Pants', 'Outwear']);
             $table->integer('quantity');
             $table->string('size');
             $table->string('image');
+            $table->timestamps();
         });
     }
 

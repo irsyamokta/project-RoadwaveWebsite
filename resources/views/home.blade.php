@@ -11,13 +11,13 @@
             @include('layouts.footer')
         @endcan
         @include('script')
-
-    @else
+    @endauth
+    @guest
         @include('layouts.navigasi.navbarguest')
         @include('layouts.hero')
         @include('layouts.best')
         @include('layouts.ourproduct')
         @include('layouts.footerguest')
         @include('script')
-    @endauth
+    @endguest
 @endsection

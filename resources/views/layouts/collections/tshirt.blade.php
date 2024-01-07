@@ -44,7 +44,7 @@
     @foreach ($products as $product)
     <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-darkmodeOther dark:border-gray-700">
       <a href="">
-        <img src="{{ url('assets/product/' . $product->image . '') }}" class="rounded-t-lg" width="w-full" alt="" />
+        <img src="{{ url('storage/assets/product/' . $product->image . '') }}" class="rounded-t-lg" width="w-full" alt="" />
       </a>
       <div class="px-2 py-3">
         <h3 class="text-slate-500 text-xs">{{ $product->category }}</h3>

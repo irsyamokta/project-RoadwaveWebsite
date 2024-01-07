@@ -47,14 +47,6 @@
                   <button id="submitButton" class="w-full bg-[#12524B] hover:bg-slate-500 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  focus:ring-blue-800 text-white" type="submit">
                     Login
                   </button>
-                  <div class="text-sm">
-                    <label class="font-light text-gray-500 text-gray-300">
-                      Don't have an account?
-                      <a href="{{ route('register') }}" class="font-bold text-mainColor hover:underline text-primary-500">
-                        Register
-                      </a>
-                    </label>
-                  </div>
               </div>
             </div>
           </div>
