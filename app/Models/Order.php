@@ -16,6 +16,8 @@ class Order extends Model
         'phone',
         'address',
         'note',
+        'product_name',
+        'total_order',
         'total',
         'status',
     ];

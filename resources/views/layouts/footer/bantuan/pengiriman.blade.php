@@ -1,4 +1,5 @@
 @extends('index')
+@section('content')
 @auth
   @include('layouts.navigasi.navbar')
 @endauth
@@ -66,11 +67,12 @@
         <img src="{{ url('assets\icon\underconstruction.png') }}" width="w-full" alt="" />
       </div>
     </div>
-  </div>
+</div>
 @auth
-  @include('layouts.footer')
+  @include('layouts.footer.footer')
 @endauth
 @guest
-  @include('layouts.footerguest')
+  @include('layouts.footer.footerguest')
 @endguest
 @include('layouts.navigasi.bottombar')
+@endsection

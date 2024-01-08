@@ -7,7 +7,7 @@ use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Validation\Validator;
+use Illuminate\Support\Facades\DB;
 
 
 class AdminController extends Controller
@@ -15,7 +15,7 @@ class AdminController extends Controller
 
     public function index()
     {
-        return view('admin.dashboard');
+        return view('admin.dashboard.dashboard');
     }
 
     public function loginAdmin()
@@ -25,7 +25,7 @@ class AdminController extends Controller
         }
 
         $data['title'] = 'Login Admin';
-        return view('admin/login', $data);
+        return view('admin.auth.login', $data);
     }
 
     public function loginAdmin_action(Request $request) {
@@ -63,17 +63,18 @@ class AdminController extends Controller
     public function dashboard(){
         $orders = Order::all();
         $products = Product::all();
-        return view('admin.dashboard', compact('orders', 'products'));
+        return view('admin.dashboard.dashboard', compact('orders', 'products'));
     }
 
     public function products(){
         $products = Product::all();
-        return view('admin.product', compact('products'));
+        return view('admin.crud.viewproduct', compact('products'));
     }
 
     public function addProduct(){
-        return view('admin.addproduct');
+        return view('admin.crud.addproduct');
     }
+
     public function addProduct_action(Request $request){
         $request->validate([
             'name' => 'required|string',
@@ -81,6 +82,7 @@ class AdminController extends Controller
             'description'=> 'required',
             'category'=> 'required',
             'quantity'=> 'required|numeric',
+            'color'=> 'required',
             'size'=> 'required',
             'image'=> 'required',
         ]);
@@ -91,17 +93,19 @@ class AdminController extends Controller
         $product->description = $request->description;
         $product->category = $request->category;
         $product->quantity = $request->quantity;
+        $product->color = $request->color;
         $product->size = $request->size;
+
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
             $imagePath = $request->file('image')->store('public/assets/product');
             $product->image = basename($imagePath);
         } else {
-            return redirect()->route('addproduct')->with('error', 'Gagal menambahkan produk. File gambar tidak valid atau tidak diunggah.');
+            return redirect()->route('products')->with('error', 'Gagal menambahkan produk. File gambar tidak valid atau tidak diunggah.');
         }
 
         $product->save();
 
-        return redirect()->route('addproduct')->with('success', 'Berhasil menambahkan produk');
+        return redirect()->route('products')->with('success', 'Berhasil menambahkan produk');
     }
 
     public function editProduct($id){
@@ -111,7 +115,7 @@ class AdminController extends Controller
             abort(404);
         }
     
-        return view('admin.editproduct', compact('product'));
+        return view('admin.crud.updateproduct', compact('product'));
     }
 
     public function editProduct_action(Request $request, $id){
@@ -122,6 +126,7 @@ class AdminController extends Controller
             'category'=> 'required',
             'quantity'=> 'required|numeric',
             'size'=> 'required',
+            'color'=> 'required',
             'image'=> 'required|image|max:2048',
         ]);
 
@@ -131,6 +136,7 @@ class AdminController extends Controller
         $product->description = $request->description;
         $product->category = $request->category;
         $product->quantity = $request->quantity;
+        $product->color = $request->color;
         $product->size = $request->size;
 
         if ($request->hasFile('image') && $request->file('image')->isValid()) {
@@ -139,7 +145,6 @@ class AdminController extends Controller
         } else {
             return redirect()->route('addproduct')->with('error', 'Gagal menambahkan produk. File gambar tidak valid atau tidak diunggah.');
         }
-
         $product->save();
         return redirect()->route('products')->with('success', 'Berhasil mengedit produk');
     }
@@ -158,7 +163,6 @@ class AdminController extends Controller
         }
 
         $product->delete();
-
         return redirect()->route('products')->with('success', 'Produk berhasil dihapus');
-        }
     }
+}

@@ -54,35 +54,35 @@ Route::controller(HomeController::class)->group(function (){
 Route::get('/tshirt', [ProductController::class, 'product'])->name('product');
 
 Route::get('/panduanukuran', function () {
-    return view('layouts.bantuan.panduanukuran');
+    return view('layouts.footer.bantuan.panduanukuran');
 });
 Route::get('/pertanyaanumum', function () {
-    return view('layouts.bantuan.pertanyaanumum');
+    return view('layouts.footer.bantuan.pertanyaanumum');
 });
 Route::get('/pengiriman', function () {
-    return view('layouts.bantuan.pengiriman');
+    return view('layouts.footer.bantuan.pengiriman');
 });
 Route::get('/ketentuan', function () {
-    return view('layouts.bantuan.ketentuan');
+    return view('layouts.footer.bantuan.ketentuan');
 });
 Route::get('/retur', function () {
-    return view('layouts.bantuan.retur');
+    return view('layouts.footer.bantuan.retur');
 });
 Route::get('/tentangkami', function () {
-    return view('layouts.informasi.tentang');
+    return view('layouts.footer.informasi.tentang');
 });
 Route::get('/aturanpenggunaan', function () {
-    return view('layouts.informasi.aturanpengguna');
+    return view('layouts.footer.informasi.aturanpengguna');
 });
 Route::get('/kebijakanprivasi', function () {
-    return view('layouts.informasi.kebijakanprivasi');
+    return view('layouts.footer.informasi.kebijakanprivasi');
 });
 Route::get('/kebijakanhakcipta', function () {
-    return view('layouts.informasi.kebijakanhakcipta');
+    return view('layouts.footer.informasi.kebijakanhakcipta');
 });
 Route::get('/syaratketentuan', function () {
-    return view('layouts.informasi.syaratketentuan');
+    return view('layouts.footer.informasi.syaratketentuan');
 });
 Route::get('/aturan', function () {
-    return view('layouts.informasi.aturan');
+    return view('layouts.footer.informasi.aturan');
 });

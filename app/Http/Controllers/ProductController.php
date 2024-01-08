@@ -10,6 +10,6 @@ class ProductController extends Controller
     {
         $products = Product::all();
 
-        return view('layouts.collections.tshirt', compact('products'));
+        return view('layouts.footer.collections.tshirt', compact('products'));
     }
 }

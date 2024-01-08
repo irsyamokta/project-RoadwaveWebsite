@@ -19,6 +19,7 @@ return new class extends Migration
             $table->enum('category', ['T-Shirt', 'Shirt', 'Pants', 'Outwear']);
             $table->integer('quantity');
             $table->string('size');
+            $table->string('color');
             $table->string('image');
             $table->timestamps();
         });

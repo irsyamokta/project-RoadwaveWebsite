@@ -1,4 +1,5 @@
 @extends('index')
+@section('content')
 @auth
   @include('layouts.navigasi.navbar')
 @endauth
@@ -96,9 +97,10 @@
     </div>
   </div>
 @auth
-  @include('layouts.footer')
+  @include('layouts.footer.footer')
 @endauth
 @guest
-  @include('layouts.footerguest')
+  @include('layouts.footer.footerguest')
 @endguest
 @include('layouts.navigasi.bottombar')
+@endsection

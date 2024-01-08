@@ -1,4 +1,5 @@
 @extends('index')
+@section('content')
 @auth
   @include('layouts.navigasi.navbar')
 @endauth
@@ -6,8 +7,7 @@
   @include('layouts.navigasi.navbarguest')
 @endguest
 @include('layouts.navigasi.sidebar')
-@section('title', 'Aturan')
-<!-- BreadCrumb -->
+@section('title', 'Tentang Kami')
 <nav class="flex mt-24 ps-7 mb-7 max-w-screen-xl mx-auto" aria-label="Breadcrumb">
     <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
       <li class="inline-flex items-center">
@@ -33,20 +33,20 @@
           <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
           </svg>
-          <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Aturan</span>
+          <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Tentang Kami</span>
         </div>
       </li>
     </ol>
   </nav>
 
-  <div class="mt-10 mb-10">
+  <div class="mt-10 mb-10 w-full max-w-screen-xl mx-auto">
     <!-- Tabs -->
     <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 mt-5 px-7 md:px-10">
       <li class="me-2">
-        <a href="/tentangkami" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300">Tentang Kami</a>
+        <a href="/tentangkami" aria-current="page" class="inline-block p-4 text-white bg-mainColor rounded-t-lg active dark:bg-mainColor dark:text-white">Tentang Kami</a>
       </li>
       <li class="me-2">
-        <a href="/aturanpengguna" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300">Aturan Pengguna</a>
+        <a href="/aturanpenggunaan" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300">Aturan Pengguna</a>
       </li>
       <li class="me-2">
         <a href="/kebijakanprivasi" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300">Kebijakan Privasi</a>
@@ -58,32 +58,30 @@
         <a href="/syaratketentuan" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300">Syarat & Ketentuan Berlaku</a>
       </li>
       <li class="me-2">
-        <a href="/aturan" aria-current="page" class="inline-block p-4 text-white bg-mainColor rounded-t-lg active dark:bg-mainColor dark:text-white">Aturan</a>
+        <a href="/aturan" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300">Aturan</a>
       </li>
     </ul>
 
     <!-- Content -->
     <div class="px-10 md:px-14 py-5 mb-5">
-      <h3 class="text-3xl font-semibold text-slate-700 mb-5 dark:text-gray-200 mt-5">Policy</h3>
+      <h3 class="text-3xl font-semibold text-slate-700 mb-5 dark:text-gray-200 mt-5">Tentang Roadwave</h3>
       <p class="mb-3 text-gray-500 dark:text-gray-400 px-1 text-justify">
-        Kami mengizinkan Anda untuk memberikan komentar dan masukan di situs kami, mengenai produk dan pelayanan. Bagaimanapun, kami tidak akan menerima informasi rahasia atau hak kepemilikan. Oleh karena itu, semua komentar, masukan,
-        kartu pos, saran, ide, dan ungkapan pengajuan, yang diserahkan atau dilampirkan kepada Roadwave Apparel melalui situs ini, atau sebaliknya (secara kolektif, masukan), akan dianggap non-rahasia dan menjadi serta tetap properti
-        milik Roadwave Apparel.
+        Roadwave Apparel, sebagai merek pakaian, menggabungkan gaya unik dengan inspirasi otomotif. Sebagai pelopor gaya hidup otomotif, kami berkomitmen memberikan pengalaman berbelanja yang menginspirasi dan memperkuat komunitas pecinta
+        kendaraan bermotor. Misi kami mencakup inovasi desain, menyajikan produk berkualitas tinggi, dan memberikan dukungan aktif kepada komunitas otomotif melalui kolaborasi, acara, dan konten yang memotivasi. Dengan filosofi desain
+        yang menciptakan keseimbangan harmonis antara estetika modern dan elemen klasik otomotif, setiap produk kami adalah ungkapan semangat kebebasan dan petualangan di jalan.
       </p>
-      <p class="mb-3 text-gray-500 dark:text-gray-400 px-1 text-justify">Anda setuju bahwa tidak ada masukan yang :</p>
-      <ul class="ps-10 space-y-1 list-decimal list-outside text-base text-gray-500 font-normal dark:text-gray-400">
-        <li>Melanggar hak setiap pihak ketiga, termasuk hak cipta, merek dagang, privasi atau hak kepemilikan pribadi, atau</li>
-        <li>
-          Memfitnah atau melanggar hukum, kasar atau cabul. Anda bertanggungjawab atas isi dari setiap masukan yang Anda berikan dan setuju untuk menjamin dan memberikan kami beserta afiliasi kami keamanan dan kekebalan hukum dari dan
-          terhadap klaim apapun yang terjadi dari masukan tersebut.
-        </li>
-      </ul>
+      <p class="text-gray-500 dark:text-gray-400 px-1 text-justify">
+        Roadwave Apparel bukan sekadar merek pakaian; kami adalah komunitas tempat individu dapat mengekspresikan cinta mereka terhadap dunia otomotif melalui gaya pribadi. Koleksi produk kami, termasuk kaos, jaket, topi, dan aksesori,
+        menawarkan desain menarik yang memenuhi kebutuhan para pecinta otomotif. Dengan fokus pada keberlanjutan, kami juga berkomitmen untuk menjalankan praktik bisnis yang ramah lingkungan. Roadwave Apparel, lebih dari sekadar pakaian,
+        merupakan destinasi utama bagi mereka yang mencari gaya hidup otomotif yang autentik dan penuh semangat.
+      </p>
     </div>
   </div>
 @auth
-  @include('layouts.footer')
+  @include('layouts.footer.footer')
 @endauth
 @guest
-  @include('layouts.footerguest')
+  @include('layouts.footer.footerguest')
 @endguest
 @include('layouts.navigasi.bottombar')
+@endsection

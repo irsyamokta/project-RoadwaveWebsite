@@ -1,13 +1,13 @@
 @extends('index')
 @section('Title', 'Edit Produk')
-@include('admin.sidebarproduct')
+@include('admin.navigasi.sidebarproduct')
 @section('content')
 
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg ml-8 mr-8 p-6 md:ml-72 md:mr-10 md:mt-10">
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg ml-8 mr-8 p-6 md:ml-64 md:mr-10 md:mt-2">
     <div>
-        <h1 class="text-md md:text-xl font-bold text-center mb-8">Edit Produk</h1>
+        <h1 class="text-md md:text-xl font-bold text-center mb-6">Edit Produk</h1>
     </div>
-    <form action="{{ route('editproduct.action', ['id' => $product->id]) }}" method="POST" enctype="multipart/form-data" class="max-w-sm lg:max-w-2xl mx-auto">
+    <form id="editproductForm" action="{{ route('editproduct.action', ['id' => $product->id]) }}" method="POST" enctype="multipart/form-data" class="max-w-sm lg:max-w-2xl mx-auto">
         @csrf
         <div class="flex flex-col lg:flex-row lg:gap-8 justify-between lg:w-full">
             <div class="lg:w-full">
@@ -27,6 +27,19 @@
                         <option value="M">M</option>
                         <option value="L">L</option>
                         <option value="XL">XL</option>
+                    </select>
+                </div>
+                <div class="mb-5">
+                    <label for="color" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Warna</label>
+                    <select id="color" name="color" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                        <option selected>{{ $product->color }}</option>
+                        <option value="-">-</option>
+                        <option value="Hitam">Hitam</option>
+                        <option value="Putih">Putih</option>
+                        <option value="Abu">Abu</option>
+                        <option value="Hijau">Hijau</option>
+                        <option value="Maroon">Maroon</option>
+                        <option value="Navy">Navy</option>
                     </select>
                 </div>
                 <div class="mb-5">
@@ -51,40 +64,60 @@
                 </div>
                 <div class="mb-5">
                     <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deskripsi</label>
-                    <textarea id="description" name="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 h-[140px] rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Deskripsikan produk anda...">{{ $product->description }}</textarea>
+                    <textarea id="description" name="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 h-[230px] rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Deskripsikan produk anda...">{{ $product->description }}</textarea>
                 </div>
             </div>
         </div>
-        <div class="flex w-full justify-center mt-8 gap-5">
-            <button id="editButton" type="submit" class="text-white w-1/2 bg-mainColor hover:bg-mainColorOld focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Edit</button>
-            <button href="{{ route('deleteproduct', $product->id) }}" method="DELETE" type="button" id="deleteButton" class="inline-flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-md">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                </svg>
-                Delete
-              </button>
+        <div class="flex w-full justify-center mt-2">
+            <button id="editButton" type="submit" class="text-white w-1/2 bg-mainColor hover:bg-mainColorOld focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Simpan</button>
         </div>
     </form>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <script>
-
-    @if(session('success'))
-        Swal.fire({
-              icon: 'success',
-              title: 'Sukses',
-              text: '{{ session('success') }}',
-        });
-    @endif
-
-    @if($errors->any())
-        Swal.fire({
-              icon: 'error',
-              title: 'Error',
-              html: '@foreach($errors->all() as $err){{ $err }}<br>@endforeach',
-        });
-    @endif
-</script>
+    const addButton = document.getElementById('editButton');
+    addButton.addEventListener('click', (event) => {
+        const nameValue = document.getElementById('name').value;
+        const priceValue = document.getElementById('price').value;
+        const sizeValue = document.getElementById('size').value;
+        const colorValue = document.getElementById('color').value;
+        const imageValue = document.getElementById('image').value;
+        const quantityValue = document.getElementById('quantity').value;
+        const categoryValue = document.getElementById('category').value;
+        const descriptionValue = document.getElementById('description').value;
+        if (!nameValue || !priceValue || !sizeValue
+            || !colorValue || !imageValue || !quantityValue
+            || !categoryValue) {
+            event.preventDefault();
+            Swal.fire({
+                title: "Error!",
+                text: "Harap isi semua inputan.",
+                icon: "error",
+            });
+        } else {
+            event.preventDefault();
+            Swal.fire({
+                title: "Menunggu...",
+                text: "Proses sedang berlangsung.",
+                icon: "info",
+                showCancelButton: false,
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+            });
+            setTimeout(() => {
+                Swal.fire({
+                    title: "Success!",
+                    text: "Data berhasil diubah!",
+                    icon: "success",
+                    confirmButtonText: "OK",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = "{{ route('products') }}";   
+                        document.getElementById('editproductForm').submit();
+                    }
+                });
+            }, 3000);
+        }
+    });
+    </script>
 @endsection

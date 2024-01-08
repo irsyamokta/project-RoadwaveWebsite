@@ -1,4 +1,6 @@
 @extends('index')
+@section('title', 'Ketentuan & Cek')
+@section('content')
 @auth
   @include('layouts.navigasi.navbar')
 @endauth
@@ -6,7 +8,7 @@
   @include('layouts.navigasi.navbarguest')
 @endguest
 @include('layouts.navigasi.sidebar')
-@section('title', 'Ketentuan & Cek')
+    
 <!-- BreadCrumb -->
     <nav class="flex mt-24 ps-7 mb-7 max-w-screen-xl mx-auto" aria-label="Breadcrumb">
       <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
@@ -109,11 +111,12 @@
         </ul>
         <p class="font-semibold text-slate-700 dark:text-gray-200 text-justify mb-3">CUSTOMER CARE (021) 2927-8888, EMAIL: CUSTOMERCARE@JNE.CO.ID</p>
       </div>
-    </div>
-  @auth
-    @include('layouts.footer')
-  @endauth
-  @guest
-    @include('layouts.footerguest')
-  @endguest
-@include('layouts.navigasi.bottombar')
+  </div>
+    @auth
+    @include('layouts.footer.footer')
+    @endauth
+    @guest
+    @include('layouts.footer.footerguest')
+    @endguest
+    @include('layouts.navigasi.bottombar')
+@endsection

@@ -5,19 +5,19 @@
             @include('admin.dashboard')
         @else
             @include('layouts.navigasi.navbar')
-            @include('layouts.hero')
-            @include('layouts.best')
-            @include('layouts.ourproduct')
-            @include('layouts.footer')
+            @include('layouts.product.hero')
+            @include('layouts.product.best')
+            @include('layouts.product.ourproduct')
+            @include('layouts.footer.footer')
         @endcan
         @include('script')
     @endauth
     @guest
-        @include('layouts.navigasi.navbarguest')
-        @include('layouts.hero')
-        @include('layouts.best')
-        @include('layouts.ourproduct')
-        @include('layouts.footerguest')
+        @include('layouts.navigasi.navbar')
+        @include('layouts.product.hero')
+        @include('layouts.product.best')
+        @include('layouts.product.ourproduct')
+        @include('layouts.footer.footerguest')
         @include('script')
     @endguest
 @endsection

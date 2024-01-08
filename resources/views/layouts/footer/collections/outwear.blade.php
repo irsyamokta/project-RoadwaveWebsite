@@ -6,13 +6,13 @@
   @include('layouts.navigasi.navbarguest')
 @endguest
 @include('layouts.navigasi.sidebar')
-@section('title', 'Shirt')
+@section('title', 'Outwear')
 
 
 @auth
-  @include('layouts.footer')
+  @include('layouts.footer.footer')
 @endauth
 @guest
-  @include('layouts.footerguest')
+  @include('layouts.footer.footerguest')
 @endguest
 @include('layouts.navigasi.bottombar')

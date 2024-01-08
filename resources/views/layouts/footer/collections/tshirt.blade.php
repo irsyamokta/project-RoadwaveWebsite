@@ -1,4 +1,5 @@
 @extends('index')
+@section('content')
 @auth
   @include('layouts.navigasi.navbar')
 @endauth
@@ -42,7 +43,7 @@
   <!-- Product-Card -->
   <div class="px-2 py-6 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 w-full max-w-screen-xl mx-auto">
     @foreach ($products as $product)
-    <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-darkmodeOther dark:border-gray-700">
+    <div id="{{ $product->id }}" class="bg-white border border-gray-200 rounded-lg shadow dark:bg-darkmodeOther dark:border-gray-700">
       <a href="">
         <img src="{{ url('storage/assets/product/' . $product->image . '') }}" class="rounded-t-lg" width="w-full" alt="" />
       </a>
@@ -67,9 +68,10 @@
     @endforeach
   </div>
 @auth
-  @include('layouts.footer')
+  @include('layouts.footer.footer')
 @endauth
 @guest
-  @include('layouts.footerguest')
+  @include('layouts.footer.footerguest')
 @endguest
 @include('layouts.navigasi.bottombar')
+@endsection

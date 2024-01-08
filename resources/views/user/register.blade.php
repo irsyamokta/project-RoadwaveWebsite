@@ -68,12 +68,9 @@
   </div>
 </div>
 
-<!-- Include SweetAlert library -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<!-- JavaScript to trigger SweetAlert modals -->
 <script>
-    // Show success alert on page load if there is a success message
     @if(session('success'))
         Swal.fire({
             icon: 'success',
@@ -82,7 +79,6 @@
         });
     @endif
 
-    // Show error alert on page load if there are any errors
     @if($errors->any())
         Swal.fire({
             icon: 'error',
