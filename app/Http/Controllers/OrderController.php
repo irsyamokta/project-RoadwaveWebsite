@@ -10,12 +10,17 @@ class OrderController extends Controller
 {
     public function index(){
 
-        return view('admin.dashboard');
+        return view('layouts.product.viewproduct');
     }
 
-    public function order(){
+    public function order($id){
         $orders = Order::all();
-        $products = Product::all();
-        return view('admin.index', compact('orders', 'products'));
+        $products = Product::where('id', $id)->get();
+        return view('layouts.product.viewproduct', compact('orders', 'products'));
     }
+
+    // public function cart($id){
+    //     $products = Product::where('id', $id)->get();
+    //     return view('layouts.checkout.cartguest', compact('products'));
+    // }
 }

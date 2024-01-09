@@ -2,7 +2,7 @@
 @section('content')
     @auth
         @can('admin')
-            @include('admin.dashboard')
+            @include('admin.dashboard.dashboard')
         @else
             @include('layouts.navigasi.navbar')
             @include('layouts.product.hero')
@@ -13,7 +13,7 @@
         @include('script')
     @endauth
     @guest
-        @include('layouts.navigasi.navbar')
+        @include('layouts.navigasi.navbarguest')
         @include('layouts.product.hero')
         @include('layouts.product.best')
         @include('layouts.product.ourproduct')

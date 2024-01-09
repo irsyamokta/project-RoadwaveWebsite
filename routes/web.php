@@ -51,7 +51,17 @@ Route::controller(HomeController::class)->group(function (){
     });
 });
 
-Route::get('/tshirt', [ProductController::class, 'product'])->name('product');
+Route::controller(OrderController::class)->group(function (){
+    Route::get('order/{id}', [OrderController::class, 'order'])->name('order');
+    
+});
+
+Route::controller(ProductController::class)->group(function (){
+    Route::get('tshirt', [ProductController::class, 'product'])->name('product');
+    Route::get('cart', [ProductController::class, 'cart'])->name('cart');
+    Route::get('productdetail/{id}', [ProductController::class, 'productdetail'])->name('productdetail');
+});
+
 
 Route::get('/panduanukuran', function () {
     return view('layouts.footer.bantuan.panduanukuran');

@@ -119,6 +119,7 @@ class AdminController extends Controller
     }
 
     public function editProduct_action(Request $request, $id){
+
         $request->validate([
             'name' => 'required|string',
             'price'=> 'required|numeric',

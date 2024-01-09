@@ -1,7 +1,7 @@
-@extends('index')
-@section('Title', 'Edit Produk')
-@include('admin.navigasi.sidebarproduct')
+@extends('admin.index')
+@section('title', 'Edit Product')
 @section('content')
+@include('admin.navigasi.sidebarproduct')
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg ml-8 mr-8 p-6 md:ml-64 md:mr-10 md:mt-2">
     <div>

@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Family -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500&display=swap" rel="stylesheet" />
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              mainColor: "#12524B",
+              mainColorOld: "#0d3d40",
+              darkmodeBg: "#121b22",
+              darkmodeOther: "#1f2c34",
+            },
+            fontFamily: {
+              manrope: ["Manrope"],
+            },
+          },
+        },
+      };
+    </script>
+    <style type="text/tailwindcss">
+      #toggle:checked ~ label div.toggle-circle {
+        @apply translate-x-4;
+      }
+    </style>
+  </head>
+  <body class="font-manrope dark:bg-darkmodeBg">
+    <!-- Navbar -->
+    <nav class="fixed top-0 z-[80] w-full bg-white border-b border-gray-200 dark:bg-darkmodeOther dark:border-gray-700 shadow">
+      <div class="px-4 py-4 lg:px-10 max-w-screen-xl mx-auto">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center justify-between w-full bg rtl:justify-end">
+            <!-- Hamburger Sidebar -->
+            <div class="flex justify-between items-center flex-1 sm:hidden">
+              <button
+                class="inline-flex items-center p-2 rounded-lg sm:hidden hover:bg-mainColor group text-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-300 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                type="button"
+                data-drawer-target="drawer-navigation"
+                data-drawer-show="drawer-navigation"
+                aria-controls="drawer-navigation"
+              >
+                <span class="sr-only">Open main menu</span>
+                <svg class="w-6 h-6 group-hover:text-white" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    clip-rule="evenodd"
+                    fill-rule="evenodd"
+                    d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Logo -->
+            <a href="#" class="flex ms-2 flex-2">
+              <img src="/resource/logo.png" class="h-8 me-3" alt="Roadwave Logo" />
+            </a>
+            <ul class="hidden sm:flex flex-row font-bold rounded-lg rtl:space-x-reverse dark:bg-gray-800 text-sm md:basis-1/3">
+              <li>
+                <a href="#" class="text-base block py-2 px-3 text-slate-600 rounded hover:text-mainColor dark:text-gray-400" aria-current="page">PRODUCT</a>
+              </li>
+              <li>
+                <a href="#" class="text-base block py-2 px-3 text-slate-700 rounded hover:text-mainColor dark:text-gray-400">INFORMATION</a>
+              </li>
+              <li>
+                <a href="#" class="text-base block py-2 px-3 text-slate-700 rounded hover:text-mainColor dark:text-gray-400">HELP</a>
+              </li>
+              <li>
+                <a href="#" class="text-base block py-2 px-3 text-slate-700 rounded hover:text-mainColor dark:text-gray-400">SALE</a>
+              </li>
+            </ul>
+            <div class="flex justify-end items-center flex-1 sm:flex-none">
+              <!-- Search Icon -->
+              <button
+                class="lg:hidden inline-flex items-center p-2 text-slate-800 rounded-lg hover:bg-mainColor focus:outline-none focus:ring-2 focus:ring-slate-300 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 group"
+                type="button"
+                data-drawer-target=""
+                data-drawer-show=""
+                aria-controls=""
+              >
+                <span class="sr-only">Open main menu</span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 group-hover:text-white">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                </svg>
+              </button>
+              <!-- Search -->
+              <div class="relative hidden lg:block">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                  <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                  </svg>
+                </div>
+                <input
+                  type="text"
+                  id="search-navbar"
+                  class="block w-full p-1.5 ps-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Cari produk..."
+                />
+              </div>
+              <!-- Cart -->
+              <button
+                class="inline-flex items-center p-2 text-slate-800 rounded-lg hover:bg-mainColor focus:outline-none focus:ring-2 focus:ring-slate-300 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 ml-1 group"
+                type="button"
+                data-drawer-target=""
+                data-drawer-show=""
+                aria-controls=""
+              >
+                <span class="sr-only">Open main menu</span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 group-hover:text-white">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                  />
+                </svg>
+              </button>
+              <!-- Like -->
+              <button
+                class="sm:inline-flex hidden items-center p-2 text-slate-800 rounded-lg hover:bg-mainColor focus:outline-none focus:ring-2 focus:ring-slate-300 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 ml-1 group"
+                type="button"
+                data-drawer-target=""
+                data-drawer-show=""
+                aria-controls=""
+              >
+                <span class="sr-only">Open main menu</span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 group-hover:text-white">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                </svg>
+              </button>
+              <!-- Account -->
+              <button
+                type="button"
+                class="lg:inline-flex hidden items-center p-2 text-slate-800 rounded-lg hover:bg-mainColor focus:outline-none focus:ring-2 focus:ring-slate-300 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600 ml-1 group"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 group-hover:text-white">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div id="drawer-navigation" class="fixed top-0 left-0 z-[81] w-64 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white dark:bg-darkmodeOther" tabindex="-1" aria-labelledby="drawer-navigation-label">
+      <h5 id="drawer-navigation-label" class="font-extrabold text-mainColor uppercase font-manrope dark:text-gray-400 text-lg">Menu</h5>
+      <hr class="w-4/5 border rounded-full border-slate-300 outline-none mt-2" />
+      <button
+        type="button"
+        data-drawer-hide="drawer-navigation"
+        aria-controls="drawer-navigation"
+        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 end-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+      >
+        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path
+            fill-rule="evenodd"
+            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+        <span class="sr-only">Close menu</span>
+      </button>
+      <div class="py-4 overflow-y-auto">
+        <ul class="space-y-2 font-medium">
+          <li>
+            <a href="#" class="flex items-center p-2 text-slate-800 rounded-lg dark:text-white hover:bg-slate-200 dark:hover:bg-gray-700 group font-manrope text-base active:bg-mainColor active:text-white">
+              <span class="ms-3">T-Shirt</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center p-2 text-slate-800 rounded-lg dark:text-white hover:bg-slate-200 dark:hover:bg-gray-700 group font-manrope text-base active:bg-mainColor active:text-white">
+              <span class="ms-3">Shirt</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center p-2 text-slate-800 rounded-lg dark:text-white hover:bg-slate-200 dark:hover:bg-gray-700 group font-manrope text-base active:bg-mainColor active:text-white">
+              <span class="ms-3">Pants</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center p-2 text-slate-800 rounded-lg dark:text-white hover:bg-slate-200 dark:hover:bg-gray-700 group font-manrope text-base active:bg-mainColor active:text-white">
+              <span class="ms-3">Outwear</span>
+            </a>
+          </li>
+          <hr />
+          <li>
+            <a href="#" class="flex items-center p-2 text-slate-800 rounded-lg dark:text-white hover:bg-slate-200 dark:hover:bg-gray-700 group font-manrope text-base active:bg-mainColor active:text-white">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+              </svg>
+              <span class="ms-3">My Wish List</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center p-2 text-slate-800 rounded-lg dark:text-white hover:bg-slate-200 dark:hover:bg-gray-700 group font-manrope text-base active:bg-mainColor active:text-white">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+              </svg>
+              <span class="ms-3">Information</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="flex items-center p-2 text-slate-800 rounded-lg dark:text-white hover:bg-slate-200 dark:hover:bg-gray-700 group font-manrope text-base active:bg-mainColor active:text-white">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"
+                />
+              </svg>
+              <span class="ms-3">Help</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+
+    <div class="fixed bottom-0 left-0 z-30 w-full h-16 bg-white border-t border-gray-200 dark:bg-darkmodeOther dark:border-gray-600 lg:hidden">
+      <div class="grid h-full max-w-lg grid-cols-5 mx-auto font-medium font-manrope">
+        <button type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mb-0.5 text-slate-500 dark:text-gray-400 group-hover:text-mainColor dark:group-hover:text-mainColor">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+            />
+          </svg>
+
+          <span class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-mainColor dark:group-hover:text-mainColor">Beranda</span>
+        </button>
+        <button type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mb-0.5 text-slate-500 dark:text-gray-400 group-hover:text-mainColor dark:group-hover:text-mainColor">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+            />
+          </svg>
+          <span class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-mainColor dark:group-hover:text-mainColor">Kategori</span>
+        </button>
+        <button type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+          <svg class="w-6 h-6 mb-0.5 text-slate-500 dark:text-gray-400 group-hover:text-mainColor dark:group-hover:text-mainColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+            <path fill="currentColor" d="m44.105 55.641l3.598-2.079l-4.666-3.925z" />
+            <path
+              fill="currentColor"
+              d="M88.558 49.96c0-.885-.435-1.663-1.097-2.151l.014-.024l-9.324-5.383l5.367-9.296l-.018-.011a2.666 2.666 0 0 0-.127-2.408a2.667 2.667 0 0 0-2.025-1.314v-.026H70.58V18.61h-.022a2.667 2.667 0 0 0-1.314-2.022a2.662 2.662 0 0 0-2.412-.125l-.013-.023l-9.481 5.474l-5.25-9.094l-.019.011a2.668 2.668 0 0 0-2.149-1.094c-.885 0-1.664.435-2.151 1.097l-.024-.014l-5.337 9.244l-9.19-5.306l-.011.019a2.666 2.666 0 0 0-2.408.127a2.666 2.666 0 0 0-1.315 2.025h-.027v10.674H18.845v.021a2.667 2.667 0 0 0-2.022 1.314a2.667 2.667 0 0 0-.126 2.41l-.023.014l5.246 9.087l-9.394 5.424l.011.019a2.668 2.668 0 0 0-1.094 2.149c0 .885.435 1.664 1.097 2.151l-.014.024l9.324 5.383l-5.367 9.296l.018.01a2.666 2.666 0 0 0 .127 2.408a2.667 2.667 0 0 0 2.025 1.314v.027H29.42V81.39h.022c.092.816.549 1.58 1.314 2.022a2.665 2.665 0 0 0 2.412.125l.013.023l9.481-5.474l5.25 9.094l.019-.011a2.668 2.668 0 0 0 2.149 1.094c.885 0 1.664-.435 2.151-1.096l.023.013l5.337-9.244l9.191 5.306l.011-.019a2.666 2.666 0 0 0 2.408-.127a2.664 2.664 0 0 0 1.315-2.025h.027V70.398h10.613v-.021a2.667 2.667 0 0 0 2.022-1.314a2.667 2.667 0 0 0 .126-2.41l.023-.013l-5.246-9.087l9.394-5.424l-.011-.019a2.67 2.67 0 0 0 1.094-2.15M37.537 65.197c-2.23 1.288-4.252 1.464-5.971 1.002l.241-2.697c1.302.377 2.985.375 4.575-.544c1.367-.789 1.658-1.765 1.269-2.438c-1.159-2.006-6.992 3.23-9.499-1.111c-1.108-1.92-.367-4.471 2.35-6.039c1.833-1.059 3.675-1.383 5.426-.988l-.309 2.623c-1.433-.324-2.908-.004-4.084.674c-1.038.6-1.367 1.389-.967 2.082c1.049 1.816 6.965-3.236 9.451 1.069c1.219 2.109.616 4.58-2.482 6.367m13.943-8.326l-1.854-1.535l-4.947 2.856l.401 2.374l-2.785 1.607L40.08 48.07l3.079-1.777l11.106 8.971zm3.753-2.166l-6.661-11.538l2.474-1.429l5.413 9.375l4.878-2.816l1.249 2.163zm9.012-5.203l-6.661-11.537l8.164-4.715l1.248 2.162l-5.707 3.296l1.398 2.422l5.586-3.226l1.248 2.162l-5.586 3.225l1.518 2.63l5.708-3.296l1.249 2.162z"
+            />
+          </svg>
+          <span class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-mainColor dark:group-hover:text-mainColor">Sale</span>
+        </button>
+        <button type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+          <svg class="w-6 h-6 mb-0.5 text-slate-500 dark:text-gray-400 group-hover:text-mainColor dark:group-hover:text-mainColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path fill="none" stroke="currentColor" stroke-width="2" d="M2 7h18m-4-5l5 5l-5 5m6 5H4m4-5l-5 5l5 5" />
+          </svg>
+          <span class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-mainColor dark:group-hover:text-mainColor">Transaksi</span>
+        </button>
+        <button type="button" class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mb-0.5 text-slate-500 dark:text-gray-400 group-hover:text-mainColor dark:group-hover:text-mainColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+          </svg>
+
+          <span class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-mainColor dark:group-hover:text-mainColor">Akun</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <main class="max-w-screen-xl mx-auto mt-24 px-4">
+      <div class="w-full mx-auto mb-7">
+        <h3 class="text-xl font-semibold text-slate-700 dark:text-gray-200">Keranjang Belanja</h3>
+      </div>
+      <div class="w-full flex flex-col mx-auto justify-center items-center mb-5">
+        <img src="/resource/search-removebg-preview.png" class="w-64 mb-5" alt="" />
+        <h4 class="text-lg text-center font-semibold text-slate-700 dark:text-gray-200 mb-3">Keranjang belanja kamu masih kosong!</h4>
+        <p class="text-sm text-center text-slate-700 dark:text-gray-200 mb-5">Ayo, belanja sekarang juga dengan banyak promo menarik lainnya</p>
+        <button
+          type="button"
+          class="text-white bg-mainColor hover:bg-mainColorOld focus:ring-4 focus:ring-slate-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-mainColor dark:hover:bg-mainColorOld focus:outline-none dark:focus:ring-slate-300"
+        >
+          Belanja Sekarang
+        </button>
+      </div>
+      <div class="w-full mx-auto">
+        <div class="w-full mx-auto flex justify-between items-center">
+          <h3 class="text-xl font-semibold text-slate-700 dark:text-gray-200 mb-5">Produk Impianmu</h3>
+          <a href="">
+            <h3 class="text-sm font-semibold text-mainColor mb-5">Lihat Lainnya</h3>
+          </a>
+        </div>
+        <div class=" grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 w-full max-w-screen-xl mx-auto">
+          <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-darkmodeOther dark:border-gray-700">
+            <a href="">
+              <img src="/image/IMG_8815.JPG" class="rounded-t-lg" width="w-full" alt="" />
+            </a>
+            <div class="px-2 py-3">
+              <h3 class="text-slate-500 text-xs">T-Shirt</h3>
+              <a href="">
+                <h5 class="text-base font-bold text-gray-900 dark:text-gray-200 mb-1">Roadwave T-Shirt Nissan GTR</h5>
+              </a>
+              <div class="flex justify-between">
+                <div class="flex justify-start items-center flex-wrap">
+                  <p class="text-xs text-red-600 mr-0.5">Rp</p>
+                  <p class="text-xs text-red-600 mr-1">90.000</p>
+                  <p class="text-xs mr-0.5 dark:text-slate-600"><s>Rp</s></p>
+                  <p class="text-xs dark:text-slate-600"><s>120.000</s></p>
+                </div>
+                <div class="flex items-center justify-center ml-1">
+                  <span class="bg-red-600 px-1 py-[5px] text-white font-semibold text-[10px] rounded">20%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-darkmodeOther dark:border-gray-700">
+            <a href="">
+              <img src="/image/IMG_8816.JPG" class="rounded-t-lg" width="w-full" alt="" />
+            </a>
+            <div class="px-2 py-3">
+              <h3 class="text-slate-500 text-xs">T-Shirt</h3>
+              <a href="">
+                <h5 class="text-base font-bold text-gray-900 dark:text-gray-200 mb-1">Roadwave T-Shirt Nissan GTR</h5>
+              </a>
+              <div class="flex justify-between">
+                <div class="flex justify-start items-center flex-wrap">
+                  <p class="text-xs text-red-600 mr-0.5">Rp</p>
+                  <p class="text-xs text-red-600 mr-1">90.000</p>
+                  <p class="text-xs mr-0.5 dark:text-slate-600"><s>Rp</s></p>
+                  <p class="text-xs dark:text-slate-600"><s>120.000</s></p>
+                </div>
+                <div class="flex items-center justify-center ml-1">
+                  <span class="bg-red-600 px-1 py-[5px] text-white font-semibold text-[10px] rounded">20%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-darkmodeOther dark:border-gray-700">
+            <a href="">
+              <img src="/image/IMG_8817.JPG" class="rounded-t-lg" width="w-full" alt="" />
+            </a>
+            <div class="px-2 py-3">
+              <h3 class="text-slate-500 text-xs">T-Shirt</h3>
+              <a href="">
+                <h5 class="text-base font-bold text-gray-900 dark:text-gray-200 mb-1">Roadwave T-Shirt Nissan GTR</h5>
+              </a>
+              <div class="flex justify-between">
+                <div class="flex justify-start items-center flex-wrap">
+                  <p class="text-xs text-red-600 mr-0.5">Rp</p>
+                  <p class="text-xs text-red-600 mr-1">90.000</p>
+                  <p class="text-xs mr-0.5 dark:text-slate-600"><s>Rp</s></p>
+                  <p class="text-xs dark:text-slate-600"><s>120.000</s></p>
+                </div>
+                <div class="flex items-center justify-center ml-1">
+                  <span class="bg-red-600 px-1 py-[5px] text-white font-semibold text-[10px] rounded">20%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-darkmodeOther dark:border-gray-700">
+            <a href="">
+              <img src="/image/IMG_8818.JPG" class="rounded-t-lg" width="w-full" alt="" />
+            </a>
+            <div class="px-2 py-3">
+              <h3 class="text-slate-500 text-xs">T-Shirt</h3>
+              <a href="">
+                <h5 class="text-base font-bold text-gray-900 dark:text-gray-200 mb-1">Roadwave T-Shirt Nissan GTR</h5>
+              </a>
+              <div class="flex justify-between">
+                <div class="flex justify-start items-center flex-wrap">
+                  <p class="text-xs text-red-600 mr-0.5">Rp</p>
+                  <p class="text-xs text-red-600 mr-1">90.000</p>
+                  <p class="text-xs mr-0.5 dark:text-slate-600"><s>Rp</s></p>
+                  <p class="text-xs dark:text-slate-600"><s>120.000</s></p>
+                </div>
+                <div class="flex items-center justify-center ml-1">
+                  <span class="bg-red-600 px-1 py-[5px] text-white font-semibold text-[10px] rounded">20%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-darkmodeOther dark:border-gray-700">
+            <a href="">
+              <img src="/image/IMG_8819.JPG" class="rounded-t-lg" width="w-full" alt="" />
+            </a>
+            <div class="px-2 py-3">
+              <h3 class="text-slate-500 text-xs">T-Shirt</h3>
+              <a href="">
+                <h5 class="text-base font-bold text-gray-900 dark:text-gray-200 mb-1">Roadwave T-Shirt Nissan GTR</h5>
+              </a>
+              <div class="flex justify-between">
+                <div class="flex justify-start items-center flex-wrap">
+                  <p class="text-xs text-red-600 mr-0.5">Rp</p>
+                  <p class="text-xs text-red-600 mr-1">90.000</p>
+                  <p class="text-xs mr-0.5 dark:text-slate-600"><s>Rp</s></p>
+                  <p class="text-xs dark:text-slate-600"><s>120.000</s></p>
+                </div>
+                <div class="flex items-center justify-center ml-1">
+                  <span class="bg-red-600 px-1 py-[5px] text-white font-semibold text-[10px] rounded">20%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    </main>
+    <!-- End Content -->
+
+    <!-- Footer  -->
+
+    <footer class="bg-white dark:bg-darkmodeOther mb-16 sm:mb-0 px-5">
+      <div class="mx-auto w-full max-w-screen-xl md:pb-14 lg:pb-0">
+        <div class="grid grid-cols-2 gap-8 px-4 py-6 lg:py-8 md:grid-cols-4">
+          <div>
+            <h2 class="mb-6 text-base font-semibold text-gray-900 uppercase dark:text-white">Collection</h2>
+            <ul class="text-gray-500 dark:text-gray-400 font-medium">
+              <li class="mb-4">
+                <a href="#" class="hover:underline text-sm">T-Shirt</a>
+              </li>
+              <li class="mb-4">
+                <a href="#" class="hover:underline text-sm">Shirt</a>
+              </li>
+              <li class="mb-4">
+                <a href="#" class="hover:underline text-sm">Pants</a>
+              </li>
+              <li class="mb-4">
+                <a href="#" class="hover:underline text-sm">Outwear</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h2 class="mb-6 text-base font-semibold text-gray-900 uppercase dark:text-white">Information</h2>
+            <ul class="text-gray-500 dark:text-gray-400 font-medium">
+              <li class="mb-4">
+                <a href="#" class="hover:underline text-sm">Tentang Kami</a>
+              </li>
+              <li class="mb-4">
+                <a href="#" class="hover:underline text-sm">Aturan Pengguna</a>
+              </li>
+              <li class="mb-4">
+                <a href="#" class="hover:underline text-sm">Kebijakan Privasi</a>
+              </li>
+              <li class="mb-4">
+                <a href="#" class="hover:underline text-sm">Kebijakan Hak Cipta</a>
+              </li>
+              <li class="mb-4">
+                <a href="#" class="hover:underline text-sm">Syarat & Ketentuan Berlaku</a>
+              </li>
+              <li class="mb-4">
+                <a href="#" class="hover:underline text-sm">Aturan</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h2 class="mb-6 text-base font-semibold text-gray-900 uppercase dark:text-white">Bantuan</h2>
+            <ul class="text-gray-500 dark:text-gray-400 font-medium">
+              <li class="mb-4">
+                <a href="#" class="hover:underline text-sm">Panduan Ukuran</a>
+              </li>
+              <li class="mb-4">
+                <a href="#" class="hover:underline text-sm">Pertanyaan Umum</a>
+              </li>
+              <li class="mb-4">
+                <a href="#" class="hover:underline text-sm">Ketentuan & Cek</a>
+              </li>
+              <li class="mb-4">
+                <a href="#" class="hover:underline text-sm">Pengiriman</a>
+              </li>
+              <li class="mb-4">
+                <a href="#" class="hover:underline text-sm">Retur & Pengembalian Dana</a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h2 class="mb-6 text-base font-semibold text-gray-900 uppercase dark:text-white">Pelayanan</h2>
+            <ul class="text-gray-500 dark:text-gray-400 font-medium">
+              <li class="mb-5 text-sm">Jam dan Hari Kerja</li>
+              <li class="mb-4 text-sm">09.00 - 17.00</li>
+            </ul>
+          </div>
+        </div>
+        <div class="hidden px-4 py-6 bg-[#343A40] dark:bg-darkmodeOther lg:flex lg:items-center lg:justify-between">
+          <span class="text-sm text-white dark:text-gray-300 sm:text-center">© 2023 <a href="https://flowbite.com/">Roadwave™</a>. All Rights Reserved. </span>
+          <div class="flex mt-4 sm:justify-center md:mt-0 space-x-5 rtl:space-x-reverse">
+            <a href="#" class="text-gray-400 hover:text-gray-900 dark:hover:text-white">
+              <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 30 30">
+                <path
+                  d="M 9.9980469 3 C 6.1390469 3 3 6.1419531 3 10.001953 L 3 20.001953 C 3 23.860953 6.1419531 27 10.001953 27 L 20.001953 27 C 23.860953 27 27 23.858047 27 19.998047 L 27 9.9980469 C 27 6.1390469 23.858047 3 19.998047 3 L 9.9980469 3 z M 22 7 C 22.552 7 23 7.448 23 8 C 23 8.552 22.552 9 22 9 C 21.448 9 21 8.552 21 8 C 21 7.448 21.448 7 22 7 z M 15 9 C 18.309 9 21 11.691 21 15 C 21 18.309 18.309 21 15 21 C 11.691 21 9 18.309 9 15 C 9 11.691 11.691 9 15 9 z M 15 11 A 4 4 0 0 0 11 15 A 4 4 0 0 0 15 19 A 4 4 0 0 0 19 15 A 4 4 0 0 0 15 11 z"
+                ></path>
+              </svg>
+              <span class="sr-only">Instagram page</span>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-gray-900 dark:hover:text-white">
+              <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 50 50">
+                <path
+                  d="M25,2C12.318,2,2,12.318,2,25c0,3.96,1.023,7.854,2.963,11.29L2.037,46.73c-0.096,0.343-0.003,0.711,0.245,0.966 C2.473,47.893,2.733,48,3,48c0.08,0,0.161-0.01,0.24-0.029l10.896-2.699C17.463,47.058,21.21,48,25,48c12.682,0,23-10.318,23-23 S37.682,2,25,2z M36.57,33.116c-0.492,1.362-2.852,2.605-3.986,2.772c-1.018,0.149-2.306,0.213-3.72-0.231 c-0.857-0.27-1.957-0.628-3.366-1.229c-5.923-2.526-9.791-8.415-10.087-8.804C15.116,25.235,13,22.463,13,19.594 s1.525-4.28,2.067-4.864c0.542-0.584,1.181-0.73,1.575-0.73s0.787,0.005,1.132,0.021c0.363,0.018,0.85-0.137,1.329,1.001 c0.492,1.168,1.673,4.037,1.819,4.33c0.148,0.292,0.246,0.633,0.05,1.022c-0.196,0.389-0.294,0.632-0.59,0.973 s-0.62,0.76-0.886,1.022c-0.296,0.291-0.603,0.606-0.259,1.19c0.344,0.584,1.529,2.493,3.285,4.039 c2.255,1.986,4.158,2.602,4.748,2.894c0.59,0.292,0.935,0.243,1.279-0.146c0.344-0.39,1.476-1.703,1.869-2.286 s0.787-0.487,1.329-0.292c0.542,0.194,3.445,1.604,4.035,1.896c0.59,0.292,0.984,0.438,1.132,0.681 C37.062,30.587,37.062,31.755,36.57,33.116z"
+                ></path>
+              </svg>
+              <span class="sr-only">Whatsapp community</span>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-gray-900 dark:hover:text-white">
+              <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 50 50">
+                <path
+                  d="M 25 1 C 19.672869 1 15.604123 5.9531422 15.166016 12 L 5.0585938 12 C 3.9235937 12 2.999376 12.980995 3.0625 14.113281 L 4.7871094 44.285156 C 4.9365844 46.922145 7.1369035 49 9.7773438 49 L 40.222656 49 C 42.863851 49 45.063433 46.921831 45.212891 44.285156 L 46.9375 14.115234 C 47.002643 12.982141 46.076406 12 44.941406 12 L 34.833984 12 C 34.395877 5.9531422 30.327131 1 25 1 z M 25 3 C 29.036936 3 32.408924 6.8867916 32.835938 12 L 17.164062 12 C 17.591075 6.8867916 20.963064 3 25 3 z M 25.080078 18 C 28.920078 18 31.799062 20.060938 32.039062 20.210938 L 31.009766 21.880859 C 30.759766 21.710859 30.310625 21.439844 30.140625 21.339844 C 29.120625 20.789844 27.240078 19.970703 25.080078 19.970703 C 21.830078 19.970703 19.480469 21.77 19.480469 24.25 C 19.480469 26.72 21.660234 27.699766 25.240234 29.009766 C 28.870234 30.329766 32.970703 31.829609 32.970703 36.599609 C 32.970703 40.189609 29.430156 43.009766 24.910156 43.009766 C 20.920156 43.009766 17.640078 40.560156 16.830078 39.910156 L 17.939453 38.259766 C 17.969453 38.289766 21.160156 41.029297 24.910156 41.029297 C 28.270156 41.029297 31 39.039609 31 36.599609 C 31 33.439609 28.570547 32.319375 24.560547 30.859375 C 21.260547 29.649375 17.509766 28.28 17.509766 24.25 C 17.509766 20.69 20.760078 18 25.080078 18 z"
+                ></path>
+              </svg>
+              <span class="sr-only">Shopee account</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+    <script src="https://kit.fontawesome.com/cbaed131ab.js" crossorigin="anonymous"></script>
+    <script>
+      const checkbox = document.querySelector("#toggle");
+      const html = document.querySelector("html");
+
+      checkbox.addEventListener("click", function () {
+        checkbox.checked ? html.classList.add("dark") : html.classList.remove("dark");
+      });
+    </script>
+  </body>
+</html>
