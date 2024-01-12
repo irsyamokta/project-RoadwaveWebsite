@@ -13,14 +13,15 @@ class OrderController extends Controller
         return view('layouts.product.viewproduct');
     }
 
-    public function order($id){
+    public function order(){
         $orders = Order::all();
-        $products = Product::where('id', $id)->get();
-        return view('layouts.product.viewproduct', compact('orders', 'products'));
+        $products = Product::all();
+        return view('admin.order.vieworderproduct', compact('orders', 'products'));
     }
 
-    // public function cart($id){
-    //     $products = Product::where('id', $id)->get();
-    //     return view('layouts.checkout.cartguest', compact('products'));
-    // }
+    public function orderinfo(Request $request, $id){
+        $orders = Order::where('id', $id)->get();
+        $products = Product::all();
+        return view('admin.order.vieworderproduct', compact('orders', 'products'));
+    }
 }

@@ -86,7 +86,7 @@ class AdminController extends Controller
             'size'=> 'required',
             'image'=> 'required',
         ]);
- 
+
         $product = new Product();
         $product->name = $request->name;
         $product->price = $request->price;

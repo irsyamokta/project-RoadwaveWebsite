@@ -29,6 +29,14 @@
           <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
           </svg>
+          <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400"><a href="/{{ $product->category }}">{{ $product->category }}</a></span>
+        </div>
+      </li>
+      <li aria-current="page">
+        <div class="flex items-center">
+          <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+          </svg>
           <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">{{ $product->name }}</span>
         </div>
       </li>
@@ -128,28 +136,31 @@
           </div>
           <div class="mb-7">
             <h3 class="text-base font-bold text-slate-700 dark:text-gray-200 mb-2">Warna</h3>
-            <span class="flex w-5 h-5 me-3 bg-white border  rounded-full"></span>
+              @if($product->color == 'Hitam')
+              <span class="flex w-5 h-5 me-3 bg-black border border-gray-700 rounded-full"></span>
+              @elseif($product->color == 'Putih')
+              <span class="flex w-5 h-5 me-3 bg-white border border-gray-700 rounded-full"></span>
+              @elseif($product->color == 'Hijau')
+              <span class="flex w-5 h-5 me-3 bg-green-500 border border-gray-700 rounded-full"></span>
+              @elseif($product->color == 'Maroon')
+              <span class="flex w-5 h-5 me-3 bg-red-700 border border-gray-700 rounded-full"></span>
+              @elseif($product->color == 'Navy')
+              <span class="flex w-5 h-5 me-3 bg-blue-700 border border-gray-700 rounded-full"></span>
+              @elseif($product->color == 'Abu')
+              <span class="flex w-5 h-5 me-3 bg-slate-500 border border-gray-700 rounded-full"></span>
+              @endif
           </div>
           <div class="w-full flex items-center space-x-2">
-            <button
-              type="button"
-              class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-slate-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-slate-300 flex-auto w-1/5 flex flex-auto justify-center items-center"
-            >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 group-hover:text-white">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-            </svg>
-              
+            <button type="button" class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-slate-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-slate-300 flex-auto w-1/5 flex flex-auto justify-center items-center">
+              <a href="/whishlist">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 group-hover:text-white">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                </svg>
+              </a>
             </button>
-            <button
-              type="button"
-              class="text-slate-100 bg-mainColor hover:bg-mainColorOld focus:ring-4 focus:ring-slate-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-mainColor dark:hover:bg-mainColorOld focus:outline-none dark:focus:ring-slate-300 flex justify-center items-center flex-auto w-4/5"
-            >
+            <button type="button" class="text-slate-100 bg-mainColor hover:bg-mainColorOld focus:ring-4 focus:ring-slate-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-mainColor dark:hover:bg-mainColorOld focus:outline-none dark:focus:ring-slate-300 flex justify-center items-center flex-auto w-4/5">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-2 group-hover:text-white">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
-              />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
             </svg>
               <a href="{{ route('cart', $product->id) }}">Tambahkan ke Keranjang</a>
             </button>

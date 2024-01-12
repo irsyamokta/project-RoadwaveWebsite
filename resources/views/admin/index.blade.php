@@ -31,6 +31,9 @@
         };
     </script>
     <style type="text/tailwindcss">
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
         #toggle:checked ~ label div.toggle-circle {
             @apply translate-x-4;
         }

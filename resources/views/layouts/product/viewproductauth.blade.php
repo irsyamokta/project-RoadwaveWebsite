@@ -9,7 +9,7 @@
 @endguest
 @include('layouts.navigasi.sidebar')
 <!-- BreadCrumb -->
-@foreach ($products as $product)
+@foreach($products as $product) 
 <main class="max-w-screen-xl mx-auto mt-24 px-4">
 <nav class="flex mb-7 w-full mx-auto" aria-label="Breadcrumb">
     <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
@@ -24,6 +24,14 @@
         </a>
       </li>
       <li></li>
+      <li aria-current="page">
+        <div class="flex items-center">
+          <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+          </svg>
+          <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400"><a href="/{{ $product->category }}">{{ $product->category }}</a></span>
+        </div>
+      </li>
       <li aria-current="page">
         <div class="flex items-center">
           <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
@@ -69,96 +77,150 @@
     @endforeach
     <div class="rounded-lg w-full lg:flex-auto lg:w-1/3">
       <div class="shadow-sm border-2 rounded-lg py-4 px-4 w-full">
-        <h3 class="text-base font-bold text-slate-700 dark:text-gray-200 mb-7">Silahkan Pilih Varian</h3>
-        <h3 class="text-base font-bold text-slate-700 dark:text-gray-200 ">SubTotal</h3>
-        <div class="flex justify-between mb-7">
-          <div class="flex items-center justify-center">
-            <p class="text-base mr-1 dark:text-slate-600"><s>Rp</s></p>
-            <p class="text-base dark:text-slate-600"><s>120.000</s></p>
+        <form id="form-add-cart" action="{{ route('checkout', $product->id)  }}" method="POST" enctype="multipart/form-data">
+          @csrf
+          <h3 class="text-base font-bold text-slate-700 dark:text-gray-200 mb-7">Silahkan Pilih Varian</h3>
+          <div class="">
+            <input type="text" class="hidden" id="name" name="name" value="{{ $product->name }}">
+            <input type="text" class="hidden" id="image" name="image" value="{{ $product->image }}">
           </div>
-          <div class="flex justify-start items-center flex-wrap">
-            <p class="text-base text-red-600 mr-1">Rp</p>
-            <p class="text-base text-red-600 mr-2">90.000</p>
-            <span class="bg-red-600 px-1 py-[5px] text-white font-semibold text-sm rounded">20%</span>
-          </div>
-        </div>
-        <div class="">
-          <h3 class="text-base font-bold text-slate-700 dark:text-gray-200 mb-2">Ukuran</h3>
-          <div class="flex mb-7 space-x-7">
-            <div class="flex items-center">
-              <input
-                id="default-radio-1"
-                type="radio"
-                value=""
-                name="default-radio"
-                class="w-4 h-4 text-mainColor bg-gray-100 border-gray-300 focus:ring-slate-200 dark:focus:ring-gray-700 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-              />
-              <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">S</label>
+          <h3 class="text-base font-bold text-slate-700 dark:text-gray-200">SubTotal</h3>
+          <div class="flex justify-between mb-7">
+            <div class="flex items-center justify-center">
+              <p class="text-base mr-1 dark:text-slate-600"><s>Rp</s></p>
+              <p class="text-base dark:text-slate-600"><s>120.000</s></p>
             </div>
-            <div class="flex items-center">
-              <input
-                id="default-radio-1"
-                type="radio"
-                value=""
-                name="default-radio"
-                class="w-4 h-4 text-mainColor bg-gray-100 border-gray-300 focus:ring-slate-200 dark:focus:ring-gray-700 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-              />
-              <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">M</label>
-            </div>
-            <div class="flex items-center">
-              <input
-                id="default-radio-1"
-                type="radio"
-                value=""
-                name="default-radio"
-                class="w-4 h-4 text-mainColor bg-gray-100 border-gray-300 focus:ring-slate-200 dark:focus:ring-gray-700 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-              />
-              <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">L</label>
-            </div>
-            <div class="flex items-center">
-              <input
-                id="default-radio-1"
-                type="radio"
-                value=""
-                name="default-radio"
-                class="w-4 h-4 text-mainColor bg-gray-100 border-gray-300 focus:ring-slate-200 dark:focus:ring-gray-700 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-              />
-              <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">XL</label>
+            <div class="flex justify-end items-center flex-wrap">
+              <p class="text-base text-red-600 mr-1">Rp</p>
+              <input type="text" class="w-16 text-red-600 focus:border-transparent" id="price" name="price" value="{{ number_format($product->price, 0, ',', '.') }}" readonly readonly onmousedown="return false;" onkeydown="return false;">
+              <span class="bg-red-600 px-1 py-[5px] text-white font-semibold text-sm rounded">20%</span>
             </div>
           </div>
-          <div class="mb-7">
-            <h3 class="text-base font-bold text-slate-700 dark:text-gray-200 mb-2">Warna</h3>
-            <span class="flex w-5 h-5 me-3 bg-white border  rounded-full"></span>
+          <div class="">
+            <h3 class="text-base font-bold text-slate-700 dark:text-gray-200 mb-2">Ukuran</h3>
+            <div class="flex mb-7 space-x-7">
+              <div class="flex items-center">
+                <input
+                  id="default-radio-1"
+                  type="radio"
+                  value=""
+                  name="default-radio"
+                  class="w-4 h-4 text-mainColor bg-gray-100 border-gray-300 focus:ring-slate-200 dark:focus:ring-gray-700 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                />
+                <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">S</label>
+              </div>
+              <div class="flex items-center">
+                <input
+                  id="default-radio-2"
+                  type="radio"
+                  value=""
+                  name="default-radio"
+                  class="w-4 h-4 text-mainColor bg-gray-100 border-gray-300 focus:ring-slate-200 dark:focus:ring-gray-700 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                />
+                <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">M</label>
+              </div>
+              <div class="flex items-center">
+                <input
+                  id="default-radio-3"
+                  type="radio"
+                  value=""
+                  name="default-radio"
+                  class="w-4 h-4 text-mainColor bg-gray-100 border-gray-300 focus:ring-slate-200 dark:focus:ring-gray-700 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                />
+                <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">L</label>
+              </div>
+              <div class="flex items-center">
+                <input
+                  id="default-radio-4"
+                  type="radio"
+                  value=""
+                  name="default-radio"
+                  class="w-4 h-4 text-mainColor bg-gray-100 border-gray-300 focus:ring-slate-200 dark:focus:ring-gray-700 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                />
+                <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">XL</label>
+              </div>
+              <input type="text" class="hidden" id="size" name="size" value="{{ $product->size }}">
+            </div>
+            <div class="mb-7">
+              <h3 class="text-base font-bold text-slate-700 dark:text-gray-200 mb-2">Warna</h3>
+              @if($product->color == 'Hitam')
+              <span class="flex w-5 h-5 me-3 bg-black border border-gray-700 rounded-full"></span>
+              @elseif($product->color == 'Putih')
+              <span class="flex w-5 h-5 me-3 bg-white border border-gray-700 rounded-full"></span>
+              @elseif($product->color == 'Hijau')
+              <span class="flex w-5 h-5 me-3 bg-green-500 border border-gray-700 rounded-full"></span>
+              @elseif($product->color == 'Maroon')
+              <span class="flex w-5 h-5 me-3 bg-red-700 border border-gray-700 rounded-full"></span>
+              @elseif($product->color == 'Navy')
+              <span class="flex w-5 h-5 me-3 bg-blue-700 border border-gray-700 rounded-full"></span>
+              @elseif($product->color == 'Abu')
+              <span class="flex w-5 h-5 me-3 bg-slate-500 border border-gray-700 rounded-full"></span>
+              @endif
+            </div>
+            <div class="w-full flex items-center space-x-2">
+              <button
+                type="button"
+                class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-slate-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-slate-300 flex-auto w-1/5 flex flex-auto justify-center items-center"
+              >
+                <a href="/whishlist">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 group-hover:text-white">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                  </svg>
+                </a>
+              </button>
+              <button
+              id="btn-add-cart"
+                type="button"
+                class="text-slate-100 bg-mainColor hover:bg-mainColorOld focus:ring-4 focus:ring-slate-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-mainColor dark:hover:bg-mainColorOld focus:outline-none dark:focus:ring-slate-300 flex justify-center items-center flex-auto w-4/5"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-2 group-hover:text-white">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                  />
+                </svg>
+                Tambahkan ke Keranjang
+              </button>
+            </div>
           </div>
-          <div class="w-full flex items-center space-x-2">
-            <button
-              type="button"
-              class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-slate-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-slate-300 flex-auto w-1/5 flex flex-auto justify-center items-center"
-            >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 group-hover:text-white">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-            </svg>
-              
-            </button>
-            <button
-              type="button"
-              class="text-slate-100 bg-mainColor hover:bg-mainColorOld focus:ring-4 focus:ring-slate-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-mainColor dark:hover:bg-mainColorOld focus:outline-none dark:focus:ring-slate-300 flex justify-center items-center flex-auto w-4/5"
-            >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mr-2 group-hover:text-white">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
-              />
-            </svg>
-              <a href="{{ route('cart', $product->id) }}">Tambahkan ke Keranjang</a>
-            </button>
-          </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
 </main>
+<script>
+    document.getElementById('btn-add-cart').addEventListener('click', function (e) {
+        const name = document.getElementById('name').value;
+        const price = document.getElementById('price').value;
+        const image = document.getElementById('image').value;
+        const size = document.getElementById('size').value;
+        const radio1 = document.getElementById('default-radio-1');
+        const radio2 = document.getElementById('default-radio-2');
+        const radio3 = document.getElementById('default-radio-3');
+        const radio4 = document.getElementById('default-radio-4');
+        let ukuran = '';
+    
+        if (radio1.checked) {
+            ukuran = 'S';
+        } else if (radio2.checked) {
+            ukuran = 'M';
+        } else if (radio3.checked) {
+            ukuran = 'L';
+        } else if (radio4.checked) {
+            ukuran = 'XL';
+        }
+
+        // console.log(size, name, price, image);
+        document.getElementById('size').value = ukuran;
+        document.getElementById('name').value = name;
+        document.getElementById('price').value = price;
+        document.getElementById('image').value = image;
+        window.location.href = "{{ route('checkout', $product->id) }}";
+        document.getElementById('form-add-cart').submit();
+    });
+</script>
+
 @auth
     @include('layouts.footer.footer')
 @endauth

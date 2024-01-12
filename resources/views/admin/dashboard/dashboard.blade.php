@@ -110,7 +110,7 @@
                    @endif
                 </td>
                 <td class="px-6 py-4">
-                    <a href="{{ route('order') }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Lihat</a>
+                    <a href="{{ route('order', $orders->id) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Lihat</a>
                 </td>
             </tr>
             @endforeach

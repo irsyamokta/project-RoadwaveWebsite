@@ -20,25 +20,25 @@
               type="button"
               class="text-white bg-mainColor hover:bg-mainColorOld focus:ring-4 focus:ring-slate-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-mainColor dark:hover:bg-mainColorOld focus:outline-none dark:focus:ring-slate-300"
             >
-              <a href="{{ route('product') }}">Belanja Sekarang</a>
+              <a href="{{ route('tshirt') }}">Belanja Sekarang</a>
             </button>
         </div>
         <div class="w-full mx-auto">
           <div class="w-full mx-auto flex justify-between items-center">
             <h3 class="text-xl font-semibold text-slate-700 dark:text-gray-200 mb-5">Produk Impianmu</h3>
-            <a href="{{ route('product') }}">
+            <a href="{{ route('tshirt') }}">
               <h3 class="text-sm font-semibold text-mainColor mb-5">Lihat Lainnya</h3>
             </a>
           </div>
           <div class=" grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 w-full max-w-screen-xl mx-auto">
             @foreach ($products as $product)
             <div class="bg-white border border-gray-200 rounded-lg shadow dark:bg-darkmodeOther dark:border-gray-700">
-              <a href="">
+              <a href="{{ route('productdetail', $product->id) }}">
                 <img src="{{ url('storage/assets/product/' . $product->image . '') }}" class="rounded-t-lg" width="w-full" alt="" />
               </a>
               <div class="px-2 py-3">
                 <h3 class="text-slate-500 text-xs">{{ $product->category }}</h3>
-                <a href="">
+                <a href="{{ route('productdetail', $product->id) }}">
                   <h5 class="text-base font-bold text-gray-900 dark:text-gray-200 mb-1">{{ $product->name }}</h5>
                 </a>
                 <div class="flex justify-between">

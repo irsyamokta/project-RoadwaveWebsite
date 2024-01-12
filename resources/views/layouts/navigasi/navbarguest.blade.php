@@ -29,7 +29,7 @@
           </a>
           <ul class="hidden sm:flex flex-row font-bold rounded-lg rtl:space-x-reverse text-sm md:basis-1/3">
             <li>
-              <a href="/tshirt" class="text-base block py-2 px-3 text-slate-600 rounded hover:text-mainColor dark:text-gray-400" aria-current="page">PRODUCT</a>
+              <a href="{{ route('tshirt') }}" class="text-base block py-2 px-3 text-slate-600 rounded hover:text-mainColor dark:text-gray-400" aria-current="page">PRODUCT</a>
             </li>
             <li>
               <a href="/tentangkami" class="text-base block py-2 px-3 text-slate-700 rounded hover:text-mainColor dark:text-gray-400">INFORMATION</a>
@@ -97,9 +97,11 @@
               aria-controls=""
             >
               <span class="sr-only">Open main menu</span>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 group-hover:text-white">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-              </svg>
+              <a href="/whishlist">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 group-hover:text-white">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                </svg>
+              </a>
             </button>
             <!-- Account -->
             <button

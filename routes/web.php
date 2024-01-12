@@ -51,15 +51,19 @@ Route::controller(HomeController::class)->group(function (){
     });
 });
 
-Route::controller(OrderController::class)->group(function (){
-    Route::get('order/{id}', [OrderController::class, 'order'])->name('order');
-    
+Route::controller(OrderController::class)->middleware('user.role:admin')->group(function (){
+    Route::get('order/{id}', [OrderController::class, 'orderinfo'])->name('order');
 });
 
 Route::controller(ProductController::class)->group(function (){
-    Route::get('tshirt', [ProductController::class, 'product'])->name('product');
+    Route::get('T-Shirt', [ProductController::class, 'tshirt'])->name('tshirt');
+    Route::get('Shirt', [ProductController::class, 'shirt'])->name('shirt');
+    Route::get('Pants', [ProductController::class, 'pants'])->name('pants');
+    Route::get('Outwear', [ProductController::class, 'outwear'])->name('outwear');
     Route::get('cart', [ProductController::class, 'cart'])->name('cart');
     Route::get('productdetail/{id}', [ProductController::class, 'productdetail'])->name('productdetail');
+    Route::post('checkout/{id}', [ProductController::class, 'checkout'])->name('checkout');
+    Route::get('addtocart/{id}', [ProductController::class, 'addtocart'])->name('addtocart');
 });
 
 
@@ -96,3 +100,10 @@ Route::get('/syaratketentuan', function () {
 Route::get('/aturan', function () {
     return view('layouts.footer.informasi.aturan');
 });
+Route::get('/checkout', function () {
+    return view('layouts.checkout.checkout');
+});
+Route::get('/whishlist', function () {
+    return view('layouts.product.whishlist');
+});
+
